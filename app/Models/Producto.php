@@ -6,10 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * Representa un producto del inventario y su relacion con una categoria.
+ */
 class Producto extends Model
 {
     use HasFactory;
 
+    /**
+     * Campos que pueden llenarse directamente desde el formulario validado.
+     */
     protected $fillable = [
         'nombre',
         'descripcion',
@@ -19,6 +25,9 @@ class Producto extends Model
         'imagen',
     ];
 
+    /**
+     * Convierte precio a decimal con dos decimales al recuperar el modelo.
+     */
     protected function casts(): array
     {
         return [
@@ -26,11 +35,17 @@ class Producto extends Model
         ];
     }
 
+    /**
+     * Cada producto pertenece a una sola categoria.
+     */
     public function categoria(): BelongsTo
     {
         return $this->belongsTo(Categoria::class);
     }
 
+    /**
+     * Devuelve una URL lista para mostrar la imagen o un avatar por defecto.
+     */
     public function getImagenUrlAttribute(): string
     {
         if ($this->imagen) {

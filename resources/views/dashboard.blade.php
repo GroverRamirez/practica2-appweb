@@ -15,6 +15,7 @@
 @endsection
 
 @section('content')
+    {{-- Encabezado visual del dashboard con indicadores rapidos. --}}
     <section class="dashboard-hero p-4 p-lg-5 mb-4">
         <span class="accent-pill mb-3">
             <i class="bi bi-activity"></i>
@@ -46,6 +47,7 @@
         </div>
     </section>
 
+    {{-- Tarjetas con metricas calculadas en DashboardController. --}}
     <section class="row g-4 mb-4">
         <div class="col-md-6 col-xl-3">
             <article class="metric-card p-4 h-100">
@@ -100,6 +102,7 @@
         </div>
     </section>
 
+    {{-- Tabla operativa con los ultimos productos registrados y una columna de ayuda. --}}
     <section class="row g-4">
         <div class="col-xl-8">
             <div class="table-card p-4">

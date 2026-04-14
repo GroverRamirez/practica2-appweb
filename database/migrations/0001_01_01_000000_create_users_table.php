@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Tabla principal de usuarios utilizada por el sistema de autenticacion.
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -21,12 +22,14 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        // Tabla temporal para recuperar contrasenas por correo electronico.
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
 
+        // Almacena sesiones cuando Laravel usa el driver de base de datos.
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->foreignId('user_id')->nullable()->index();
@@ -42,6 +45,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Se elimina en orden inverso para deshacer la base del modulo de autenticacion.
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');

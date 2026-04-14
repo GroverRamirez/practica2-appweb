@@ -5,6 +5,7 @@
         <title>Reporte Excel de productos</title>
     </head>
     <body>
+        {{-- Encabezado del archivo exportado con metadatos basicos. --}}
         <table border="1">
             <tr>
                 <td colspan="5"><strong>Reporte de productos</strong></td>
@@ -17,6 +18,7 @@
             </tr>
         </table>
 
+        {{-- Tabla detallada que Excel abre como un reporte tabular. --}}
         <table border="1">
             <thead>
                 <tr>

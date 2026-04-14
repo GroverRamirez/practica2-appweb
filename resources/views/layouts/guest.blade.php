@@ -14,6 +14,7 @@
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
     </head>
     <body>
+        {{-- Layout usado por login, registro y recuperacion de acceso. --}}
         <div class="auth-shell page-enter">
             <div class="auth-grid">
                 <section class="auth-promo">
@@ -36,13 +37,14 @@
                         <div class="col-sm-6">
                             <div class="feature-item h-100 bg-white bg-opacity-10 border-0 text-white">
                                 <div class="fw-semibold mb-2"><i class="bi bi-file-earmark-pdf me-2"></i>Reportes</div>
-                                <div class="text-white-50 small">Exporta resúmenes listos para revisión o entrega.</div>
+                                <div class="text-white-50 small">Exporta resumenes listos para revision o entrega.</div>
                             </div>
                         </div>
                     </div>
                 </section>
 
                 <section class="auth-card p-4 p-lg-5">
+                    {{-- Slot donde cada pantalla de autenticacion inserta su formulario. --}}
                     <div class="d-flex align-items-center gap-3 mb-4">
                         <a href="{{ route('welcome') }}" class="brand-badge"><i class="bi bi-box-seam"></i></a>
                         <div>

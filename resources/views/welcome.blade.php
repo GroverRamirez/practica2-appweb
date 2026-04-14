@@ -11,6 +11,7 @@
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
     </head>
     <body>
+        {{-- Landing publica del proyecto para presentar alcance y accesos principales. --}}
         <main class="landing-hero page-enter">
             <div class="container">
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-5">
@@ -88,6 +89,7 @@
                     </div>
                 </section>
 
+                {{-- Tarjetas que resumen las fases academicas del proyecto. --}}
                 <section class="row g-4">
                     <div class="col-lg-4">
                         <div class="landing-panel h-100">
@@ -107,7 +109,7 @@
                         <div class="landing-panel h-100">
                             <div class="small text-uppercase text-secondary fw-semibold mb-2">Fase de validacion</div>
                             <h2 class="h3 mb-3">Seeders y pruebas</h2>
-                            <p class="text-secondary mb-0">Dataset demo consistente, localizacion en español y pruebas feature del flujo principal.</p>
+                            <p class="text-secondary mb-0">Dataset demo consistente, localizacion en espanol y pruebas feature del flujo principal.</p>
                         </div>
                     </div>
                 </section>

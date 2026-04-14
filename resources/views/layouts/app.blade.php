@@ -14,6 +14,7 @@
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
     </head>
     <body>
+        {{-- Layout principal del panel privado: sidebar, topbar y contenedor del contenido. --}}
         <div class="app-shell page-enter">
             <aside class="app-sidebar offcanvas-lg offcanvas-start border-0" tabindex="-1" id="appSidebar" aria-labelledby="appSidebarLabel">
                 <div class="offcanvas-header">
@@ -90,12 +91,14 @@
                 </div>
 
                 <main class="app-content">
+                    {{-- Mensaje reutilizable para operaciones exitosas del CRUD. --}}
                     @if (session('success'))
                         <div class="alert alert-success border-0 shadow-sm rounded-4 mb-4">
                             <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
                         </div>
                     @endif
 
+                    {{-- Resumen visible de los errores de validacion enviados por Laravel. --}}
                     @if ($errors->any())
                         <div class="alert alert-danger border-0 shadow-sm rounded-4 mb-4">
                             <div class="fw-semibold mb-2">Revisa los datos enviados.</div>
@@ -107,6 +110,7 @@
                         </div>
                     @endif
 
+                    {{-- Cada vista hija inyecta aqui su contenido principal. --}}
                     @yield('content')
                     {{ $slot ?? '' }}
                 </main>

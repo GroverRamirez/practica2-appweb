@@ -20,6 +20,7 @@
 
 @section('content')
     <div class="table-card p-4">
+        {{-- El componente conserva el termino buscado y envia el filtro al mismo index. --}}
         <x-ui.search-bar :route="route('categorias.index')" :value="$buscar" placeholder="Buscar por nombre, descripcion o estado" />
 
         @if ($buscar)
@@ -28,12 +29,14 @@
             </div>
         @endif
 
+        {{-- Estado vacio para cuando no existen registros o el filtro no devuelve resultados. --}}
         @if ($categorias->isEmpty())
             <div class="empty-state">
                 <i class="bi bi-tags fs-1 d-block mb-3"></i>
                 No hay categorias registradas con los criterios actuales.
             </div>
         @else
+            {{-- Tabla principal del modulo con acciones de edicion y eliminacion. --}}
             <div class="table-responsive">
                 <table class="table align-middle">
                     <thead>
@@ -57,6 +60,7 @@
                                         <a href="{{ route('categorias.edit', $categoria) }}" class="btn btn-sm btn-outline-dark">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
+                                        {{-- La eliminacion se envia por formulario para usar el verbo DELETE. --}}
                                         <form method="POST" action="{{ route('categorias.destroy', $categoria) }}" class="d-inline js-confirm-delete" data-confirm-title="Eliminar categoria" data-confirm-text="La categoria y sus productos asociados se eliminaran del sistema.">
                                             @csrf
                                             @method('DELETE')
@@ -72,6 +76,7 @@
                 </table>
             </div>
 
+            {{-- Laravel genera automaticamente los enlaces de paginacion del listado. --}}
             <div class="mt-4">
                 {{ $categorias->links() }}
             </div>

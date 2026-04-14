@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Tabla base del modulo categorias.
         Schema::create('categorias', function (Blueprint $table) {
             $table->id();
             $table->string('nombre', 100);
@@ -25,6 +26,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Elimina por completo la tabla del modulo.
         Schema::dropIfExists('categorias');
     }
 };

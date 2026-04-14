@@ -12,8 +12,14 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
+/**
+ * Administra el CRUD de categorias y sus reportes.
+ */
 class CategoriaController extends Controller
 {
+    /**
+     * Lista categorias con busqueda, conteo de productos y paginacion.
+     */
     public function index(Request $request): View
     {
         $buscar = trim((string) $request->query('buscar', ''));
@@ -27,11 +33,17 @@ class CategoriaController extends Controller
         return view('categorias.index', compact('categorias', 'buscar'));
     }
 
+    /**
+     * Muestra el formulario para registrar una nueva categoria.
+     */
     public function create(): View
     {
         return view('categorias.create');
     }
 
+    /**
+     * Guarda una categoria nueva y le asigna estado activo por defecto.
+     */
     public function store(StoreCategoriaRequest $request): RedirectResponse
     {
         Categoria::create([
@@ -44,11 +56,17 @@ class CategoriaController extends Controller
             ->with('success', 'Categoria creada correctamente.');
     }
 
+    /**
+     * Carga el formulario de edicion con la categoria seleccionada.
+     */
     public function edit(Categoria $categoria): View
     {
         return view('categorias.edit', compact('categoria'));
     }
 
+    /**
+     * Actualiza los datos editables de una categoria existente.
+     */
     public function update(UpdateCategoriaRequest $request, Categoria $categoria): RedirectResponse
     {
         $categoria->update($request->validated());
@@ -58,10 +76,14 @@ class CategoriaController extends Controller
             ->with('success', 'Categoria actualizada correctamente.');
     }
 
+    /**
+     * Elimina la categoria y limpia las imagenes asociadas a sus productos.
+     */
     public function destroy(Categoria $categoria): RedirectResponse
     {
         $categoria->load('productos');
 
+        // Antes de borrar la categoria se eliminan los archivos fisicos relacionados.
         foreach ($categoria->productos as $producto) {
             if ($producto->imagen) {
                 Storage::disk('public')->delete($producto->imagen);
@@ -75,6 +97,9 @@ class CategoriaController extends Controller
             ->with('success', 'Categoria eliminada correctamente.');
     }
 
+    /**
+     * Genera un reporte PDF ordenado alfabeticamente.
+     */
     public function reportePdf()
     {
         $categorias = Categoria::withCount('productos')
@@ -88,6 +113,9 @@ class CategoriaController extends Controller
         return $pdf->stream('reporte-categorias.pdf');
     }
 
+    /**
+     * Exporta un archivo Excel compatible con los filtros aplicados en el index.
+     */
     public function reporteExcel(Request $request): Response
     {
         $buscar = trim((string) $request->query('buscar', ''));
@@ -104,6 +132,9 @@ class CategoriaController extends Controller
             ->header('Content-Disposition', 'attachment; filename="'.$nombreArchivo.'"');
     }
 
+    /**
+     * Centraliza la consulta base para reutilizar la misma logica en lista y reportes.
+     */
     private function categoriasQuery(string $buscar)
     {
         return Categoria::query()->when($buscar !== '', function ($query) use ($buscar) {

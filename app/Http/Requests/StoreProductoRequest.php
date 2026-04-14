@@ -4,13 +4,22 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Valida los datos de alta de productos, incluida la imagen opcional.
+ */
 class StoreProductoRequest extends FormRequest
 {
+    /**
+     * En esta practica cualquier usuario autenticado puede usar el formulario.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+    /**
+     * Reglas de negocio basicas para precios, stock y categoria relacionada.
+     */
     public function rules(): array
     {
         return [

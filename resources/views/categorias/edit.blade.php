@@ -5,6 +5,7 @@
 
 @section('content')
     <div class="form-card p-4">
+        {{-- Reutiliza el mismo parcial de formulario, pero enviando la categoria actual. --}}
         <h2 class="h4 mb-3">Editar {{ $categoria->nombre }}</h2>
         <p class="text-secondary mb-4">Modifica los datos necesarios y guarda los cambios.</p>
 

@@ -20,6 +20,7 @@
 
 @section('content')
     <div class="table-card p-4">
+        {{-- El filtro permite buscar por nombre, descripcion o categoria relacionada. --}}
         <x-ui.search-bar :route="route('productos.index')" :value="$buscar" placeholder="Buscar por nombre, descripcion o categoria" />
 
         @if ($buscar)
@@ -28,12 +29,14 @@
             </div>
         @endif
 
+        {{-- Estado vacio del inventario cuando la consulta no devuelve elementos. --}}
         @if ($productos->isEmpty())
             <div class="empty-state">
                 <i class="bi bi-box-seam fs-1 d-block mb-3"></i>
                 No hay productos registrados con los criterios actuales.
             </div>
         @else
+            {{-- Tabla principal del inventario con imagen, categoria y acciones. --}}
             <div class="table-responsive">
                 <table class="table align-middle">
                     <thead>
@@ -60,6 +63,7 @@
                                 <td>{{ $producto->categoria?->nombre ?? 'Sin categoria' }}</td>
                                 <td>${{ number_format((float) $producto->precio, 2) }}</td>
                                 <td>
+                                    {{-- Cuando el stock es bajo se resalta visualmente. --}}
                                     @if ($producto->stock <= 5)
                                         <x-ui.badge :value="'Bajo'" variant="warning" />
                                     @else
@@ -71,6 +75,7 @@
                                         <a href="{{ route('productos.edit', $producto) }}" class="btn btn-sm btn-outline-dark">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
+                                        {{-- DELETE se envia por formulario para respetar REST y activar confirmacion. --}}
                                         <form method="POST" action="{{ route('productos.destroy', $producto) }}" class="d-inline js-confirm-delete" data-confirm-title="Eliminar producto" data-confirm-text="La imagen asociada tambien se eliminara del disco publico.">
                                             @csrf
                                             @method('DELETE')
@@ -86,6 +91,7 @@
                 </table>
             </div>
 
+            {{-- El paginador mantiene el filtro gracias a withQueryString del controlador. --}}
             <div class="mt-4">
                 {{ $productos->links() }}
             </div>

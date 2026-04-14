@@ -7,8 +7,14 @@ use App\Models\Producto;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
+/**
+ * Carga un escenario inicial de trabajo para demostrar la aplicacion.
+ */
 class DatabaseSeeder extends Seeder
 {
+    /**
+     * Crea un usuario demo y pobla categorias con productos de ejemplo.
+     */
     public function run(): void
     {
         User::updateOrCreate([
@@ -18,6 +24,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('12345678'),
         ]);
 
+        // Dataset manual pensado para practicas y demostraciones en clase.
         $dataset = [
             [
                 'nombre' => 'Laptops',
@@ -48,10 +55,10 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'nombre' => 'Redes',
-                'descripcion' => 'Equipos de conectividad para laboratorios y oficinas de tamaño medio.',
+                'descripcion' => 'Equipos de conectividad para laboratorios y oficinas de tamano medio.',
                 'estado' => 'activo',
                 'productos' => [
-                    ['nombre' => 'TP-Link Archer AX55', 'descripcion' => 'Router Wi-Fi 6 con buena cobertura para entornos domesticos y pequeños negocios.', 'precio' => 148.00, 'stock' => 3],
+                    ['nombre' => 'TP-Link Archer AX55', 'descripcion' => 'Router Wi-Fi 6 con buena cobertura para entornos domesticos y pequenos negocios.', 'precio' => 148.00, 'stock' => 3],
                     ['nombre' => 'Switch TP-Link TL-SG108', 'descripcion' => 'Switch gigabit de 8 puertos para ampliar la red local.', 'precio' => 52.00, 'stock' => 10],
                 ],
             ],
@@ -66,6 +73,7 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
+        // updateOrCreate permite ejecutar el seeder varias veces sin duplicar registros.
         foreach ($dataset as $item) {
             $productos = $item['productos'];
             unset($item['productos']);

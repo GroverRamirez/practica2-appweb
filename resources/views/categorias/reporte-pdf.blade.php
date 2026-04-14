@@ -13,6 +13,7 @@
         </style>
     </head>
     <body>
+        {{-- Plantilla simple pensada para renderizarse con DomPDF sin depender del layout web. --}}
         <h1>Reporte de categorias</h1>
         <p>Fecha de generacion: {{ $fechaGeneracion->format('d/m/Y H:i') }}</p>
 

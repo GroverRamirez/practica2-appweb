@@ -5,6 +5,7 @@
         <title>Reporte Excel de categorias</title>
     </head>
     <body>
+        {{-- Primera tabla: encabezado informativo del archivo exportado. --}}
         <table border="1">
             <tr>
                 <td colspan="4"><strong>Reporte de categorias</strong></td>
@@ -17,6 +18,7 @@
             </tr>
         </table>
 
+        {{-- Segunda tabla: detalle de registros que Excel interpreta como hoja tabular. --}}
         <table border="1">
             <thead>
                 <tr>

@@ -1,6 +1,8 @@
+{{-- Token CSRF requerido por Laravel para aceptar el formulario. --}}
 @csrf
 
 @isset($producto)
+    {{-- En modo edicion el formulario envia PUT sobre la ruta resource. --}}
     @method('PUT')
 @endisset
 
@@ -15,6 +17,7 @@
 
     <div class="col-md-4">
         <label for="categoria_id" class="form-label">Categoria</label>
+        {{-- La categoria se selecciona desde el listado cargado por el controlador. --}}
         <select id="categoria_id" name="categoria_id" class="form-select @error('categoria_id') is-invalid @enderror" required>
             <option value="">Selecciona una categoria</option>
             @foreach ($categorias as $categoria)
@@ -58,22 +61,24 @@
         @error('imagen')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
-        <div class="form-hint mt-2">Formatos permitidos: JPG, PNG y WEBP. Tamaño máximo: 2 MB.</div>
+        <div class="form-hint mt-2">Formatos permitidos: JPG, PNG y WEBP. Tamano maximo: 2 MB.</div>
     </div>
 
     @isset($producto)
+        {{-- Vista previa de la imagen actual para saber si sera reemplazada. --}}
         <div class="col-12">
             <div class="d-flex align-items-center gap-3">
                 <img src="{{ $producto->imagen_url }}" alt="{{ $producto->nombre }}" class="thumb-preview">
                 <div>
                     <div class="fw-semibold">Imagen actual</div>
-                    <div class="text-secondary small">Si subes una nueva imagen, la anterior será reemplazada.</div>
+                    <div class="text-secondary small">Si subes una nueva imagen, la anterior sera reemplazada.</div>
                 </div>
             </div>
         </div>
     @endisset
 
     <div class="col-12 d-flex flex-wrap gap-2">
+        {{-- El texto del boton cambia segun si el formulario crea o actualiza. --}}
         <button type="submit" class="btn btn-primary">
             <i class="bi bi-save me-2"></i>{{ isset($producto) ? 'Actualizar producto' : 'Guardar producto' }}
         </button>

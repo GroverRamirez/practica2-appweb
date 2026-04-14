@@ -13,8 +13,14 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
+/**
+ * Administra el CRUD de productos, imagenes y reportes.
+ */
 class ProductoController extends Controller
 {
+    /**
+     * Lista productos con su categoria, busqueda y paginacion.
+     */
     public function index(Request $request): View
     {
         $buscar = trim((string) $request->query('buscar', ''));
@@ -27,6 +33,9 @@ class ProductoController extends Controller
         return view('productos.index', compact('productos', 'buscar'));
     }
 
+    /**
+     * Muestra el formulario de registro con las categorias disponibles.
+     */
     public function create(): View
     {
         $categorias = Categoria::orderBy('nombre')->get();
@@ -34,6 +43,9 @@ class ProductoController extends Controller
         return view('productos.create', compact('categorias'));
     }
 
+    /**
+     * Guarda el producto y almacena la imagen en disco si fue enviada.
+     */
     public function store(StoreProductoRequest $request): RedirectResponse
     {
         $data = $request->validated();
@@ -49,6 +61,9 @@ class ProductoController extends Controller
             ->with('success', 'Producto creado correctamente.');
     }
 
+    /**
+     * Carga el formulario de edicion con el producto y sus categorias.
+     */
     public function edit(Producto $producto): View
     {
         $categorias = Categoria::orderBy('nombre')->get();
@@ -56,6 +71,9 @@ class ProductoController extends Controller
         return view('productos.edit', compact('producto', 'categorias'));
     }
 
+    /**
+     * Reemplaza la imagen anterior si el usuario sube una nueva version.
+     */
     public function update(UpdateProductoRequest $request, Producto $producto): RedirectResponse
     {
         $data = $request->validated();
@@ -75,6 +93,9 @@ class ProductoController extends Controller
             ->with('success', 'Producto actualizado correctamente.');
     }
 
+    /**
+     * Elimina el registro y su archivo de imagen asociado.
+     */
     public function destroy(Producto $producto): RedirectResponse
     {
         if ($producto->imagen) {
@@ -88,6 +109,9 @@ class ProductoController extends Controller
             ->with('success', 'Producto eliminado correctamente.');
     }
 
+    /**
+     * Genera un reporte PDF horizontal para aprovechar mejor la tabla.
+     */
     public function reportePdf()
     {
         $productos = Producto::with('categoria')
@@ -101,6 +125,9 @@ class ProductoController extends Controller
         return $pdf->stream('reporte-productos.pdf');
     }
 
+    /**
+     * Exporta un archivo Excel compatible con el filtro usado en el listado.
+     */
     public function reporteExcel(Request $request): Response
     {
         $buscar = trim((string) $request->query('buscar', ''));
@@ -116,6 +143,9 @@ class ProductoController extends Controller
             ->header('Content-Disposition', 'attachment; filename="'.$nombreArchivo.'"');
     }
 
+    /**
+     * Reutiliza la misma consulta base en el index y en los reportes.
+     */
     private function productosQuery(string $buscar)
     {
         return Producto::with('categoria')

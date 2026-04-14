@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Cola principal de trabajos pendientes para ejecucion asincronica.
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('queue')->index();
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->unsignedInteger('created_at');
         });
 
+        // Registra lotes de jobs cuando se usan batch jobs de Laravel.
         Schema::create('job_batches', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('name');
@@ -34,6 +36,7 @@ return new class extends Migration
             $table->integer('finished_at')->nullable();
         });
 
+        // Conserva evidencia de trabajos que fallaron para depuracion.
         Schema::create('failed_jobs', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique();
@@ -50,6 +53,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Elimina las tablas del subsistema de colas.
         Schema::dropIfExists('jobs');
         Schema::dropIfExists('job_batches');
         Schema::dropIfExists('failed_jobs');
