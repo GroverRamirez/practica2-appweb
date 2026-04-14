@@ -1,0 +1,336 @@
+:root {
+    --app-sidebar-width: 290px;
+    --app-sidebar-bg: linear-gradient(180deg, #0f172a 0%, #111827 55%, #0b1120 100%);
+    --app-panel-bg: rgba(255, 255, 255, 0.88);
+    --app-panel-border: rgba(148, 163, 184, 0.22);
+    --app-accent: #f97316;
+    --app-accent-soft: rgba(249, 115, 22, 0.12);
+    --app-shadow: 0 30px 80px rgba(15, 23, 42, 0.12);
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top right, rgba(15, 118, 110, 0.14), transparent 24rem),
+        radial-gradient(circle at bottom left, rgba(249, 115, 22, 0.14), transparent 28rem),
+        linear-gradient(180deg, #f7fbfc 0%, #edf4f6 100%);
+}
+
+a {
+    text-decoration: none;
+}
+
+.page-enter {
+    animation: page-enter 0.6s ease;
+}
+
+.glass-panel,
+.metric-card,
+.table-card,
+.form-card,
+.auth-card,
+.landing-panel {
+    background: var(--app-panel-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--app-panel-border);
+    box-shadow: var(--app-shadow);
+}
+
+.app-shell {
+    display: flex;
+    min-height: 100vh;
+}
+
+.app-sidebar {
+    width: var(--app-sidebar-width);
+    color: #e2e8f0;
+    background: var(--app-sidebar-bg);
+    border-right: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.app-sidebar .offcanvas-header,
+.app-sidebar .offcanvas-body {
+    padding: 1.75rem;
+}
+
+.brand-lockup {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.brand-badge {
+    width: 3rem;
+    height: 3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    font-size: 1.4rem;
+    color: #fff7ed;
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+    box-shadow: 0 12px 24px rgba(249, 115, 22, 0.3);
+}
+
+.brand-label {
+    margin: 0;
+    color: #f8fafc;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+}
+
+.brand-copy {
+    margin: 0;
+    color: rgba(226, 232, 240, 0.72);
+    font-size: 0.85rem;
+}
+
+.sidebar-nav .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 0.4rem;
+    padding: 0.9rem 1rem;
+    color: rgba(226, 232, 240, 0.78);
+    border-radius: 1rem;
+    transition: 0.25s ease;
+}
+
+.sidebar-nav .nav-link:hover,
+.sidebar-nav .nav-link.active {
+    color: #fff;
+    background: rgba(15, 118, 110, 0.22);
+    transform: translateX(4px);
+}
+
+.sidebar-caption {
+    margin: 1.4rem 0 0.75rem;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(148, 163, 184, 0.72);
+}
+
+.sidebar-user {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.app-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.app-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    padding: 1.4rem 1.5rem 0;
+}
+
+.topbar-card {
+    border-radius: 1.4rem;
+}
+
+.app-content {
+    padding: 1.5rem;
+}
+
+.page-title {
+    margin: 0;
+    font-size: clamp(1.8rem, 2vw, 2.6rem);
+    line-height: 1.05;
+}
+
+.page-subtitle {
+    margin: 0.35rem 0 0;
+    color: #64748b;
+}
+
+.metric-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.4rem;
+}
+
+.metric-card::after {
+    content: "";
+    position: absolute;
+    inset: auto -2rem -2rem auto;
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    background: var(--app-accent-soft);
+}
+
+.metric-icon {
+    width: 3rem;
+    height: 3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    color: #fff;
+    background: linear-gradient(135deg, #0f766e 0%, #0ea5e9 100%);
+}
+
+.dashboard-hero {
+    overflow: hidden;
+    border-radius: 1.6rem;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 118, 110, 0.9));
+    color: #f8fafc;
+}
+
+.dashboard-hero .accent-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.85rem;
+    border-radius: 999px;
+    color: #fdba74;
+    background: rgba(249, 115, 22, 0.14);
+}
+
+.table-card,
+.form-card,
+.auth-card,
+.landing-panel {
+    border-radius: 1.4rem;
+}
+
+.table-card .table {
+    margin-bottom: 0;
+}
+
+.thumb-preview {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 1rem;
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
+}
+
+.search-bar {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.search-bar .form-control {
+    min-width: 220px;
+}
+
+.status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.auth-shell {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 2rem 1rem;
+    background:
+        radial-gradient(circle at top left, rgba(14, 165, 233, 0.16), transparent 20rem),
+        radial-gradient(circle at bottom right, rgba(249, 115, 22, 0.16), transparent 18rem),
+        linear-gradient(180deg, #f8fafc 0%, #e2ecef 100%);
+}
+
+.auth-grid {
+    width: min(1040px, 100%);
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 1.25rem;
+}
+
+.auth-promo {
+    padding: 2.4rem;
+    border-radius: 1.8rem;
+    color: #f8fafc;
+    background: linear-gradient(145deg, #0f172a 0%, #155e75 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-promo::after {
+    content: "";
+    position: absolute;
+    inset: auto -4rem -4rem auto;
+    width: 14rem;
+    height: 14rem;
+    border-radius: 50%;
+    background: rgba(249, 115, 22, 0.18);
+}
+
+.landing-hero {
+    padding: 6rem 0 4rem;
+}
+
+.landing-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+}
+
+.landing-panel {
+    padding: 1.6rem;
+}
+
+.feature-item {
+    padding: 1rem 1.1rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.74);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.form-hint {
+    color: #64748b;
+    font-size: 0.92rem;
+}
+
+.table thead th {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #64748b;
+    border-bottom-width: 1px;
+}
+
+.empty-state {
+    padding: 3rem 1.5rem;
+    text-align: center;
+    color: #64748b;
+}
+
+.pagination {
+    margin-bottom: 0;
+}
+
+@media (max-width: 991.98px) {
+    .app-content,
+    .app-topbar {
+        padding-inline: 1rem;
+    }
+
+    .auth-grid,
+    .landing-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@keyframes page-enter {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
